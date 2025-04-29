@@ -1,19 +1,20 @@
-import React from 'react'
-import Image from 'next/image'
+import Image from "next/image";
+import React from "react";
+
 function Alf() {
   return (
-    <div className='min-h-screen p-8 pb-20 sm:p-20 flex flex-col md:flex-row items-center justify-center gap-16'>
-        <div className='flex-1'>
-            <Image
-                src="/hoja.png"
-                alt="alfalfa"
-                className='w-full h-auto'
-                width={500}
-                height={500}
-            />
-        </div>
-    </div>
-  )
+    <>
+      <div className="flex flex-col tiems-center w-full mt-10">
+        <Image
+          src="/hoja.png"
+          alt="alfalfa"
+          className="object-contain  after:inset-0 after:bg-inherit filter after:blur-2xl after:saturate-200 -z-10 aspect-square self-center justify-center "
+          width={400}
+          height={100}
+        />
+      </div>
+    </>
+  );
 }
 
-export default Alf
+export default Alf;

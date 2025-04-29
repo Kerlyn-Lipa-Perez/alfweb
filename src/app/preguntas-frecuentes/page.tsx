@@ -8,10 +8,10 @@ function PreguntasFrecuentes() {
         {/* Title */}
         <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
           <h2 className="text-2xl font-bold md:text-4xl md:leading-tight">
-            Your questions, answered
+            Preguntas frecuentes
           </h2>
           <p className="mt-1 text-gray-600">
-            Answers to the most frequently asked questions.
+            __________________
           </p>
         </div>
         {/* End Title */}

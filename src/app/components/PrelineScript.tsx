@@ -3,15 +3,6 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-// Optional third-party libraries
-
-
-
-
-
-
-
-
 // Preline UI
 async function loadPreline() {
   return import("preline/dist/index.js");

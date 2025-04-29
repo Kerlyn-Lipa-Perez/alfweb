@@ -1,6 +1,6 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+// import { FlatCompat } from "@eslint/eslintrc";
 import perfectionist from "eslint-plugin-perfectionist";
 
 
@@ -17,6 +17,18 @@ const eslintConfig = [
       perfectionist,
     },
     rules: {
+      "perfectionist/sort-named-exports": [
+        "error",
+        { order: "asc", type: "natural" },
+      ],
+      "perfectionist/sort-named-imports": [
+        "error",
+        { order: "asc", type: "natural" },
+      ],
+      "perfectionist/sort-exports": [
+        "error",
+        { order: "asc", type: "natural" },
+      ],
       "perfectionist/sort-interfaces": ["error"],
       "perfectionist/sort-objects": [
         "error",

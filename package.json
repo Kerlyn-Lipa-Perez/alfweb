@@ -3,12 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack ",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@number-flow/react": "^0.5.9",
+    "clsx": "^2.1.1",
+    "motion": "^12.9.2",
     "next": "15.2.1",
     "preline": "^3.0.1",
     "react": "^19.0.0",
