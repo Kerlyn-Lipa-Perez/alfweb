@@ -4,6 +4,13 @@ import Link from "next/link";
 import Alf from "./components/Alf";
 import ServicesSection from "./components/ServicesSection";
 import Experience from "./components/Experience";
+import Contact from "./contact/page";
+import dynamic from "next/dynamic";
+
+
+const DynamicExperience = dynamic(() => import("./components/Experience"), {
+  loading: () => <p>Loading...</p>,
+});
 
 export default function Home() {
   return (
@@ -19,15 +26,19 @@ export default function Home() {
           Comprar ahora
         </Link>
       </div>
-      <section className="">
+      <section>
         <Alf />
       </section>
-      <section className="">
+      <section>
         <ServicesSection />
       </section>
 
-      <section className="">
-        <Experience />
+      <section>
+        <DynamicExperience />
+      </section>
+
+      <section>
+        <Contact />
       </section>
     </main>
   );

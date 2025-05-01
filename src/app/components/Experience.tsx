@@ -49,7 +49,7 @@ function Experience() {
                     format={{ notation: "compact", style: "decimal" }}
                     locales="en-US"
                     className="inline"
-                  />
+                  /> años
                 </p>
               </MotionConfig>
 
