@@ -19,8 +19,8 @@ function Experience() {
     const interval = setInterval(() => {
       current += 1;
       setNumber(current);
-      if (current >= 10) {
-        clearInterval(interval); // Detener el contador en 10
+      if (current >= 20) {
+        clearInterval(interval); // Detener el contador en 20
       }
     }, 100); 
 
