@@ -7,7 +7,7 @@ function Hero() {
   return (
 		<>
 			<div className="  pb-10  text-center">
-				<h2 className="font-bold text-6xl pb-10 sm:text-5xl">
+				<h2 className="font-bold text-6xl pb-10 ">
 					VENTA MAYORISTA Y MINORISTA <br /> DE ALFALFA DE CALIDAD
 				</h2>
 				<Link

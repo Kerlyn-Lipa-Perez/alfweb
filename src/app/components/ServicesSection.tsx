@@ -6,7 +6,7 @@ const ServicesSection = () => {
 		<section className="bg-white py-16 px-6 text-center w-full mt-10">
 			<div className="max-w-4xl mx-auto">
 				<h2 className="text-lime-400 text-sm font-semibold mb-2">Servicios</h2>
-				<h1 className="text-4xl font-bold text-gray-900 mb-6 sm:text-3xl">
+				<h1 className="text-4xl font-bold text-gray-900 mb-6 ">
 					Soluciones Integrales para Cultivo de Alfalfa
 				</h1>
 				<p className="text-gray-700 mb-12">
