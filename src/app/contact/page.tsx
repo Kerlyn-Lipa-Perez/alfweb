@@ -2,8 +2,7 @@
 import React from "react";
 import GoogleMaps from "../components/Google-maps";
 
-const DIRECCION_EMAIL =
-	process.env.NEXT_PUBLIC_DIRECCION || "";
+const DIRECCION_EMAIL = process.env.NEXT_PUBLIC_DIRECCION || "";
 const NUMERO = process.env.NEXT_PUBLIC_NUMERO || "";
 
 const markers = [
@@ -14,13 +13,12 @@ function Contact() {
 	return (
 		<section className="py-12 lg:py-20">
 			<div className="max-w-5xl mx-auto px-4 sm:px-6">
-				{/* Encabezado */}
+				{/* Encabezado */}									
 				<div className="text-center mb-12 lg:mb-16">
 					<h2 className="text-4xl font-normal text-black">Contacto</h2>
 				</div>
 
 				<div className="grid md:grid-cols-2 gap-12 lg:gap-16">
-					
 					<div className="flex flex-col justify-center space-y-12">
 						{/* Dirección */}
 						<div>
@@ -118,7 +116,6 @@ function Contact() {
 						</div>
 					</div>
 
-					
 					<div className="w-full h-64 md:h-full">
 						<div className="h-full w-full rounded-lg overflow-hidden">
 							<GoogleMaps markers={markers} />
