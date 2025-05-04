@@ -20,10 +20,6 @@ export default function Home() {
 				<Hero />
 			</section>
 
-			<section>
-				<Alf />
-			</section>
-
 			<section id="Services">
 				<ServicesSection />
 			</section>

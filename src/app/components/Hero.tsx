@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
+import Alf from './Alf';
 
 function Hero() {
 
@@ -11,11 +12,13 @@ function Hero() {
 					VENTA MAYORISTA Y MINORISTA <br /> DE ALFALFA DE CALIDAD
 				</h2>
 				<Link
-					className="bg-lime-400 hover:bg-lime-500 focus:outline-hidden focus:bg-lime-500 transition disabled:opacity-50 py-2 px-4 rounded text-2xl "
+					className="bg-lime-400 hover:bg-lime-500 focus:outline-hidden focus:bg-lime-500 transition disabled:opacity-50 py-2 px-4 rounded text-2xl  text-black"
 					href=""
 				>
 					Comprar ahora
 				</Link>
+
+				<Alf />
 			</div>
 		</>
 	);

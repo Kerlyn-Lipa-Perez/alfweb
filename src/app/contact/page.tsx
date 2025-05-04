@@ -40,7 +40,7 @@ function Contact() {
 									</svg>
 								</div>
 								<div>
-									<p className="text-gray-600">Peru</p>
+									<p className="text-gray-600">Arequipa | Camana</p>
 									<p className="text-black font-medium">
 										Mercado Don Alberto
 										<br />

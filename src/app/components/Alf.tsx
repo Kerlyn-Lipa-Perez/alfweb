@@ -3,8 +3,8 @@ import React from "react";
 
 function Alf() {
   return (
-    <>
-      <div className="flex flex-col tiems-center w-full mt-10">
+    <div>
+      <div className="flex flex-col tiems-center w-full mt-20">
         <Image
           src="/hoja.png"
           alt="alfalfa"
@@ -13,7 +13,7 @@ function Alf() {
           height={100}
         />
       </div>
-    </>
+    </div>
   );
 }
 

@@ -3,29 +3,50 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { ShoppingCart } from "lucide-react";
-
+import { link } from "fs";
 
 const Navbar = () => {
 	const [isVisible, setIsVisible] = useState(true);
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const pathname = usePathname();
 
+	const navLinks = [
+		{ href: "/", label: "Inicio" },
+		{ href: "/productos", label: "Productos" },
+		{ href: "/nosotros", label: "Nosotros" },
+		{ href: "/contacto", label: "Contacto" },
+	];
 
 	useEffect(() => {
-		let lastScrollTop = window.scrollY;
+		let lastScrollY = window.scrollY;
+
 		const controlNavbarVisibility = () => {
-			
-		}
-	},[])
+			const currentScrollY = window.scrollY;
 
+			if (currentScrollY > lastScrollY && currentScrollY > 100) {
+				setIsVisible(false); // Scroll down
+			} else {
+				setIsVisible(true); // Scroll up
+			}
 
+			lastScrollY = currentScrollY;
+		};
+		window.addEventListener("scroll", controlNavbarVisibility);
+		return () => window.removeEventListener("scroll", controlNavbarVisibility);
+	}, []);
+
+	
 
 	return (
 		<>
 			{/* ========== HEADER ========== */}
 			<header className="  flex flex-wrap lg:justify-start lg:flex-nowrap z-50 w-full py-7">
-				<nav className=" relative max-w-7xl w-full flex flex-wrap lg:grid lg:grid-cols-12 basis-full items-center px-4 md:px-6 lg:px-8 mx-auto">
-					<div className="lg:col-span-3 flex items-center">
+				<nav
+					className={` relative max-w-7xl w-full flex flex-wrap lg:grid lg:grid-cols-12 basis-full items-center px-4 md:px-6 lg:px-8 mx-auto ${
+						isVisible ? "translate-y-0" : "translate-y-full"
+					} `}
+				>
+					<div className="lg:col-span-3 flex items-center 	 ">
 						{/* Logo */}
 						<Link
 							className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80 border "
@@ -42,6 +63,7 @@ const Navbar = () => {
 					</div>
 
 					{/* Button Group */}
+
 					<div className="flex items-center gap-x-1 lg:gap-x-2 ms-auto py-1 lg:ps-6 lg:order-3 lg:col-span-3">
 						<button
 							type="button"
@@ -50,7 +72,7 @@ const Navbar = () => {
 							<ShoppingCart />
 						</button>
 
-						<div className="lg:hidden">
+						<div className="lg:hidden ">
 							<button
 								type="button"
 								className="hs-collapse-toggle size-9.5 flex justify-center items-center text-sm font-semibold rounded-xl border border-gray-200 text-black hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
@@ -103,39 +125,24 @@ const Navbar = () => {
 						aria-labelledby="hs-navbar-hcail-collapse"
 					>
 						<div className="flex flex-col gap-y-4 gap-x-0 mt-5 lg:flex-row lg:justify-center lg:items-center lg:gap-y-0 lg:gap-x-7 lg:mt-0">
-							<div>
-								<Link
-									className=" relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 "
-									href="/"
-									aria-current="page"
+							{navLinks.map((link) => (
+								<div
+									key={link.href}
+									className="flex flex-col gap-y-4 gap-x-0 mt-5 lg:flex-row lg:justify-center lg:items-center lg:gap-y-0 lg:gap-x-7 lg:mt-0"
 								>
-									Inicio
-								</Link>
-							</div>
-							<div>
-								<Link
-									className="inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600"
-									href="/productos"
-								>
-									Productos
-								</Link>
-							</div>
-							<div>
-								<Link
-									className="inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600"
-									href="preguntas-frecuentes"
-								>
-									Mas informacion
-								</Link>
-							</div>
-							<div>
-								<Link
-									className="inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600"
-									href="precios"
-								>
-									Precios
-								</Link>
-							</div>
+									<Link
+										className={` relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 transition-colors  ${
+											pathname === link.href
+												? "border-b-2 border-lime-400 hover:border-black transition-colors text-lime-400 hover:text-black"
+												: ""
+										}`}
+										key={link.href}
+										href={link.href}
+									>
+										{link.label}
+									</Link>
+								</div>
+							))}
 						</div>
 					</div>
 					{/* End Collapse */}
