@@ -3,10 +3,13 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { ShoppingCart } from "lucide-react";
-import { link } from "fs";
 
 const Navbar = () => {
-	const [isVisible, setIsVisible] = useState(true);
+	const [navState, setNavState] = useState({
+		visible: true,
+		scrolled: false,
+		lastScrollY: 0,
+	});
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const pathname = usePathname();
 
@@ -18,44 +21,65 @@ const Navbar = () => {
 	];
 
 	useEffect(() => {
-		let lastScrollY = window.scrollY;
-
-		const controlNavbarVisibility = () => {
+		const controlNavbar = () => {
 			const currentScrollY = window.scrollY;
 
-			if (currentScrollY > lastScrollY && currentScrollY > 100) {
-				setIsVisible(false); // Scroll down
+			// Determinar si se está haciendo scroll hacia arriba o abajo
+			const isScrollingDown = currentScrollY > navState.lastScrollY;
+
+			// Aplicar lógica de visibilidad
+			if (isScrollingDown && currentScrollY > 80) {
+				// Al hacer scroll hacia abajo más allá de 80px, ocultar la barra
+				setNavState({
+					visible: false,
+					scrolled: currentScrollY > 20,
+					lastScrollY: currentScrollY,
+				});
 			} else {
-				setIsVisible(true); // Scroll up
+				// Al hacer scroll hacia arriba, mostrar la barra
+				setNavState({
+					visible: true,
+					scrolled: currentScrollY > 20,
+					lastScrollY: currentScrollY,
+				});
 			}
-
-			lastScrollY = currentScrollY;
 		};
-		window.addEventListener("scroll", controlNavbarVisibility);
-		return () => window.removeEventListener("scroll", controlNavbarVisibility);
-	}, []);
 
-	
+		window.addEventListener("scroll", controlNavbar);
+		return () => window.removeEventListener("scroll", controlNavbar);
+	}, [navState.lastScrollY]);
+
+	const toggleMobileMenu = () => {
+		setIsMobileMenuOpen(!isMobileMenuOpen);
+	};
 
 	return (
 		<>
+			
+			<div className="h-24"></div>
+
 			{/* ========== HEADER ========== */}
-			<header className="  flex flex-wrap lg:justify-start lg:flex-nowrap z-50 w-full py-7">
-				<nav
-					className={` relative max-w-7xl w-full flex flex-wrap lg:grid lg:grid-cols-12 basis-full items-center px-4 md:px-6 lg:px-8 mx-auto ${
-						isVisible ? "translate-y-0" : "translate-y-full"
-					} `}
-				>
-					<div className="lg:col-span-3 flex items-center 	 ">
+			<header
+				className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ease-in-out ${
+					navState.visible ? "translate-y-0" : "-translate-y-full"
+				} ${
+					navState.scrolled
+						? "bg-white/95 shadow-md py-4"
+						: "bg-transparent py-7"
+				}`}
+			>
+				<nav className="relative max-w-7xl w-full flex flex-wrap lg:grid lg:grid-cols-12 basis-full items-center px-4 md:px-6 lg:px-8 mx-auto">
+					<div className="lg:col-span-3 flex items-center">
 						{/* Logo */}
 						<Link
-							className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80 border "
+							className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80"
 							href="/"
-							aria-label="Go to homepage"
+							aria-label="Logo"
 						>
-							<div className="text-center justify-center align-middle content-center"></div>
-
-							<svg></svg>
+							<div className="text-center justify-center align-middle content-center">
+								{/* Logo content */}
+								Logo
+							</div>
 						</Link>
 						{/* End Logo */}
 
@@ -63,7 +87,6 @@ const Navbar = () => {
 					</div>
 
 					{/* Button Group */}
-
 					<div className="flex items-center gap-x-1 lg:gap-x-2 ms-auto py-1 lg:ps-6 lg:order-3 lg:col-span-3">
 						<button
 							type="button"
@@ -72,18 +95,18 @@ const Navbar = () => {
 							<ShoppingCart />
 						</button>
 
-						<div className="lg:hidden ">
+						<div className="lg:hidden pl-5">
 							<button
 								type="button"
-								className="hs-collapse-toggle size-9.5 flex justify-center items-center text-sm font-semibold rounded-xl border border-gray-200 text-black hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
-								id="hs-navbar-hcail-collapse"
-								aria-expanded="false"
-								aria-controls="hs-navbar-hcail"
+								className="psize-9.5 flex justify-center items-center text-sm font-semibold rounded-xl border border-gray-200 text-black hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
+								onClick={toggleMobileMenu}
+								aria-expanded={isMobileMenuOpen ? "true" : "false"}
 								aria-label="Toggle navigation"
-								data-hs-collapse="#hs-navbar-hcail"
 							>
 								<svg
-									className="hs-collapse-open:hidden shrink-0 size-4"
+									className={`${
+										isMobileMenuOpen ? "hidden" : "block"
+									} shrink-0 size-4`}
 									xmlns="http://www.w3.org/2000/svg"
 									width="24"
 									height="24"
@@ -99,7 +122,9 @@ const Navbar = () => {
 									<line x1="3" x2="21" y1="18" y2="18" />
 								</svg>
 								<svg
-									className="hs-collapse-open:block hidden shrink-0 size-4"
+									className={`${
+										isMobileMenuOpen ? "block" : "hidden"
+									} shrink-0 size-4`}
 									xmlns="http://www.w3.org/2000/svg"
 									width="24"
 									height="24"
@@ -118,34 +143,29 @@ const Navbar = () => {
 					</div>
 					{/* End Button Group */}
 
-					{/* Collapse */}
+					{/* Navigation Links */}
 					<div
-						id="hs-navbar-hcail"
-						className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow lg:block lg:w-auto lg:basis-auto lg:order-2 lg:col-span-6"
-						aria-labelledby="hs-navbar-hcail-collapse"
+						className={`${
+							isMobileMenuOpen ? "block" : "hidden"
+						} lg:block w-full lg:w-auto lg:order-2 lg:col-span-6 transition-all duration-300`}
 					>
 						<div className="flex flex-col gap-y-4 gap-x-0 mt-5 lg:flex-row lg:justify-center lg:items-center lg:gap-y-0 lg:gap-x-7 lg:mt-0">
 							{navLinks.map((link) => (
-								<div
+								<Link
 									key={link.href}
-									className="flex flex-col gap-y-4 gap-x-0 mt-5 lg:flex-row lg:justify-center lg:items-center lg:gap-y-0 lg:gap-x-7 lg:mt-0"
+									className={`relative inline-block text-black focus:outline-hidden transition-colors ${
+										pathname === link.href
+											? "border-b-2 border-lime-400 hover:border-black text-lime-400 hover:text-black"
+											: "hover:text-lime-400"
+									}`}
+									href={link.href}
 								>
-									<Link
-										className={` relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 transition-colors  ${
-											pathname === link.href
-												? "border-b-2 border-lime-400 hover:border-black transition-colors text-lime-400 hover:text-black"
-												: ""
-										}`}
-										key={link.href}
-										href={link.href}
-									>
-										{link.label}
-									</Link>
-								</div>
+									{link.label}
+								</Link>
 							))}
 						</div>
 					</div>
-					{/* End Collapse */}
+					{/* End Navigation Links */}
 				</nav>
 			</header>
 			{/* ========== END HEADER ========== */}
