@@ -16,11 +16,11 @@ const DynamicExperience = dynamic(() => import("./components/Experience"), {
 export default function Home() {
   return (
 		<main className="pt-20">
-			<section id="Inicio">
+			<section>
 				<Hero />
 			</section>
 
-			<section id="Services">
+			<section >
 				<ServicesSection />
 			</section>
 

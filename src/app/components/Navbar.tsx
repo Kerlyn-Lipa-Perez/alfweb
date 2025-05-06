@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, startTransition } from "react";
 import { usePathname } from "next/navigation";
 import { ShoppingCart } from "lucide-react";
+import { unstable_ViewTransition as ViewTransition } from "react";
 
 const Navbar = () => {
 	const [navState, setNavState] = useState({
@@ -15,9 +16,9 @@ const Navbar = () => {
 
 	const navLinks = [
 		{ href: "/", label: "Inicio" },
-		{ href: "/productos", label: "Productos" },
-		{ href: "/nosotros", label: "Nosotros" },
-		{ href: "/contacto", label: "Contacto" },
+		{ href: "/products", label: "Productos" },
+		{ href: "/preguntas-frecuentes", label: "Nosotros" },
+		{ href: "/contact", label: "Contacto" },
 	];
 
 	useEffect(() => {
@@ -53,6 +54,9 @@ const Navbar = () => {
 		setIsMobileMenuOpen(!isMobileMenuOpen);
 	};
 
+	
+
+	
 	return (
 		<>
 			
