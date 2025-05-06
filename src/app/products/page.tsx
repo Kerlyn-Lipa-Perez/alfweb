@@ -58,7 +58,7 @@ const Products = () => {
               <img src={producto.imageUrl} alt={producto.name} className="w-full h-48 object-cover rounded-t-lg mb-4" />
               <h3 className="text-xl font-semibold mb-2">{producto.name}</h3>
               <p className="text-gray-600 mb-4">{producto.description}</p>
-              <p className="text-lg font-bold text-green-600">${producto.price}</p>
+              <p className="text-lg font-bold text-green-600">S./{producto.price}</p>
             </div>
           ))
         }
