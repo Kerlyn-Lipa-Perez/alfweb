@@ -167,7 +167,7 @@ function PreguntasFrecuentes() {
                 aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-three"
               >
                 <p className="text-gray-800">
-                  Aceptamos pagos con Yape/Plin y efectivo al momento de la entrega.
+                  Aceptamos pagos con Yape y efectivo al momento de la entrega.
                 </p>
               </div>
             </div>

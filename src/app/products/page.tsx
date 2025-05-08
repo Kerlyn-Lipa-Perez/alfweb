@@ -46,29 +46,39 @@ const productos:Product[] = [
 
 const Products = () => {
   return (
-    <section className='py-12 lg:py-20'>
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <h2 className="text-3xl font-bold text-center mb-8">Nuestros Productos</h2>
-        <p className="text-center text-gray-600 mb-12">Descubre nuestra selección de productos de alta calidad.</p>
-        {/* Grid de productos */}
+		<section className="py-12 lg:py-20">
+			<div className="max-w-5xl mx-auto px-4 sm:px-6">
+				<h2 className="text-3xl font-bold text-center mb-8">
+					Nuestros Productos
+				</h2>
+				<p className="text-center text-gray-600 mb-12">
+					Descubre nuestra selección de productos de alta calidad.
+				</p>
+				{/* Grid de productos */}
 
-        {
-          productos.map((producto) => (
-            <div key={producto.id} className="bg-white shadow-md rounded-lg p-6 mb-10 flex flex-col items-center ">
-              <img src={producto.imageUrl} alt={producto.name} className="w-full h-48 object-cover rounded-t-lg mb-4" />
-              <h3 className="text-xl font-semibold mb-2">{producto.name}</h3>
-              <p className="text-gray-600 mb-4">{producto.description}</p>
-              <p className="text-lg font-bold text-green-600">S./{producto.price}</p>
-            </div>
-          ))
-        }
+				{productos.map((producto) => (
+					<div
+						key={producto.id}
+						className="bg-white shadow-md rounded-lg p-6 mb-10 flex flex-col items-center "
+					>
+						<img
+							src={producto.imageUrl}
+							alt={producto.name}
+							className="w-full h-48 object-cover rounded-t-lg mb-4"
+						/>
+						<h3 className="text-xl font-semibold mb-2">{producto.name}</h3>
+						<p className="text-gray-600 mb-4">{producto.description}</p>
+						<p className="text-lg font-bold text-green-600">
+							S./{producto.price}
+						</p>
+					</div>
+				))}
 
-       
-      </div>
-
-
-    </section>
-  )
+				{/* Grid de productos */}
+        
+			</div>
+		</section>
+	);
 }
 
 export default Products
