@@ -8,39 +8,38 @@ import NumberFlow, { useCanAnimate } from "@number-flow/react";
 import { motion, MotionConfig } from "motion/react";
 import clsx from "clsx/lite";
 
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  imageUrl: string;
+interface products {
+	id: number;
+	name: string;
+	description: string;
+	price: number;
+	imageUrl: string;
 }
+ 
 
-
-const productos:Product[] = [
-  {
-    id: 1,
-    name: 'Producto 1',
-    description: 'Descripción del producto 1',
-    price: 100,
-    imageUrl: '/images/product1.jpg',
-  },
-  {
-    id: 2,
-    name: 'Producto 2',
-    description: 'Descripción del producto 2',
-    price: 200,
-    imageUrl: '/images/product2.jpg',
-  },
-  {
-    id: 3,
-    name: 'Producto 3',
-    description: 'Descripción del producto 3',
-    price: 300,
-    imageUrl: '/images/product3.jpg',
-  },
-
-]
+const productos: products[] = [
+	{
+		id: 1,
+		name: "Producto 1",
+		description: "Descripción del producto 1",
+		price: 100,
+		imageUrl: "/images/product1.jpg",
+	},
+	{
+		id: 2,
+		name: "Producto 2",
+		description: "Descripción del producto 2",
+		price: 200,
+		imageUrl: "/images/product2.jpg",
+	},
+	{
+		id: 3,
+		name: "Producto 3",
+		description: "Descripción del producto 3",
+		price: 300,
+		imageUrl: "/images/product3.jpg",
+	},
+];
 
 
 
@@ -54,7 +53,7 @@ const Products = () => {
 				<p className="text-center text-gray-600 mb-12">
 					Descubre nuestra selección de productos de alta calidad.
 				</p>
-				{/* Grid de productos */}
+				{/*  Productos */}
 
 				{productos.map((producto) => (
 					<div
@@ -68,13 +67,13 @@ const Products = () => {
 						/>
 						<h3 className="text-xl font-semibold mb-2">{producto.name}</h3>
 						<p className="text-gray-600 mb-4">{producto.description}</p>
-						<p className="text-lg font-bold text-green-600">
+						<p className="text-lg font-bold text-lime-400">
 							S./{producto.price}
 						</p>
 					</div>
 				))}
 
-				{/* Grid de productos */}
+				{/* productos */}
         
 			</div>
 		</section>
