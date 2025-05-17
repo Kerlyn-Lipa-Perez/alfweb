@@ -1,9 +1,9 @@
-"use client"
-import Image from 'next/image';
-import Link from 'next/link';
-import { ShoppingCart } from 'lucide-react';
-import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+import { ShoppingCart } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 import NumberFlow, { useCanAnimate } from "@number-flow/react";
 import { motion, MotionConfig } from "motion/react";
 import clsx from "clsx/lite";
@@ -14,8 +14,8 @@ interface products {
 	description: string;
 	price: number;
 	imageUrl: string;
+	category: string;
 }
- 
 
 const productos: products[] = [
 	{
@@ -24,6 +24,7 @@ const productos: products[] = [
 		description: "Descripción del producto 1",
 		price: 100,
 		imageUrl: "/images/product1.jpg",
+		category: "all",
 	},
 	{
 		id: 2,
@@ -31,6 +32,7 @@ const productos: products[] = [
 		description: "Descripción del producto 2",
 		price: 200,
 		imageUrl: "/images/product2.jpg",
+		category: "all",
 	},
 	{
 		id: 3,
@@ -38,13 +40,34 @@ const productos: products[] = [
 		description: "Descripción del producto 3",
 		price: 300,
 		imageUrl: "/images/product3.jpg",
+		category: "all",
 	},
 ];
 
-
-
 const Products = () => {
-  return (
+	const [products] = useState(productos);
+	const [filters, setFilters] = useState({
+		category: "all",
+		minPrice: 0,
+	});
+
+	/**
+	 *
+	 * @param products
+	 * @returns products filtered by category and price
+	 */
+	const filterProducts = (products: products[]) => {
+		return products.filter((product) => {
+			return (
+				product.price >= filters.minPrice &&
+				(filters.category === "all" || product.category === filters.category)
+			);
+		});
+	};
+
+	const filteredProducts = filterProducts(products);
+
+	return (
 		<section className="py-12 lg:py-20">
 			<div className="max-w-5xl mx-auto px-4 sm:px-6">
 				<h2 className="text-3xl font-bold text-center mb-8">
@@ -74,10 +97,9 @@ const Products = () => {
 				))}
 
 				{/* productos */}
-        
 			</div>
 		</section>
 	);
-}
+};
 
-export default Products
+export default Products;

@@ -1,27 +1,44 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react'
-import Alf from './Alf';
-
+import Link from "next/link";
+import React from "react";
+import Alf from "./Alf";
+import SplitText from "../utils/SplitText";
+import GradientText from "../utils/GradientText";
 function Hero() {
-
-  return (
-		<>
-			<div className="  pb-10  text-center">
-				<h2 className="font-bold text-6xl pb-10 ">
-					VENTA MAYORISTA Y MINORISTA <br /> DE ALFALFA DE CALIDAD
-				</h2>
-				<Link
-					className="bg-lime-400 hover:bg-lime-500 focus:outline-hidden focus:bg-lime-500 transition disabled:opacity-50 py-2 px-4 rounded text-2xl  text-black"
-					href=""
-				>
-					Comprar ahora
-				</Link>
-
-				<Alf />
+	return (
+		<section className="pb-10 text-center flex flex-col items-center">
+			<SplitText
+				text="VENTA MAYORISTA Y MINORISTA <br /> DE ALFALFA DE CALIDAD"
+				className="font-bold text-6xl pb-10 text-center"
+				delay={100}
+				animationFrom={{ opacity: 0, transform: "translate3d(0,50px,0)" }}
+				animationTo={{ opacity: 1, transform: "translate3d(0,0,0)" }}
+				threshold={0.2}
+				rootMargin="-50px"
+			/>
+			<div className="flex justify-center w-full">
+				<div>
+					<Link href={"/products"}>
+						<GradientText
+							colors={[
+								"#4ade80", // green-400
+								"#a3e635", // lime-400
+								"#a3e635", // lime-400
+								"#4ade80", // green-400
+								"#84cc16", // lime-500
+							]}
+							animationSpeed={4}
+							showBorder={true}
+							className="hover:opacity-90"
+						>
+							Comprar ahora
+						</GradientText>
+					</Link>
+				</div>
 			</div>
-		</>
+
+			<Alf />
+		</section>
 	);
 }
 
-export default Hero
+export default Hero;
