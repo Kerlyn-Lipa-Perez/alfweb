@@ -79,7 +79,7 @@ const Cart = ({ open, onClose }: CartProps) => {
 				{/* Botón WhatsApp */}
 				{cart.length > 0 && (
 					<Link
-						href={`https://wa.me/51${NUMERO}?text=${encodeURIComponent(
+						href={`https://wa.me/51${123456789}?text=${encodeURIComponent(
 							'¡Hola! Quiero comprar:\n' +
 							cart.map(item => `• ${item.name} x${item.quantity} (S./${item.price * item.quantity})`).join('\n') +
 							`\nTotal: S./${cart.reduce((acc, item) => acc + item.price * item.quantity, 0)}`
