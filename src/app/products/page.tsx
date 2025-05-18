@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import NumberFlow, { useCanAnimate } from "@number-flow/react";
 import { motion, MotionConfig } from "motion/react";
 import clsx from "clsx/lite";
+import { useCart } from "../context/CartContext";
 
 interface products {
 	id: number;
@@ -50,6 +51,7 @@ const Products = () => {
 		category: "all",
 		minPrice: 0,
 	});
+	const { addToCart } = useCart();
 
 	/**
 	 *
@@ -93,6 +95,12 @@ const Products = () => {
 						<p className="text-lg font-bold text-lime-400">
 							S./{producto.price}
 						</p>
+						<button
+							onClick={() => addToCart(producto)}
+							className="mt-2 px-4 py-2 bg-lime-400 text-black rounded-xl font-medium hover:bg-lime-500 transition"
+						>
+							Agregar al carrito
+						</button>
 					</div>
 				))}
 

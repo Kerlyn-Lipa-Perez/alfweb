@@ -4,6 +4,8 @@ import { useState, useEffect, startTransition } from "react";
 import { usePathname } from "next/navigation";
 import { ShoppingCart } from "lucide-react";
 import { unstable_ViewTransition as ViewTransition } from "react";
+import Cart from "./Cart";
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
 	const [navState, setNavState] = useState({
@@ -12,7 +14,9 @@ const Navbar = () => {
 		lastScrollY: 0,
 	});
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+	const [isCartOpen, setIsCartOpen] = useState(false);
 	const pathname = usePathname();
+	const { cart } = useCart();
 
 	const navLinks = [
 		{ href: "/", label: "Inicio" },
@@ -54,12 +58,8 @@ const Navbar = () => {
 		setIsMobileMenuOpen(!isMobileMenuOpen);
 	};
 
-	
-
-	
 	return (
 		<>
-			
 			<div className="h-24"></div>
 
 			{/* ========== HEADER ========== */}
@@ -94,9 +94,18 @@ const Navbar = () => {
 					<div className="flex items-center gap-x-1 lg:gap-x-2 ms-auto py-1 lg:ps-6 lg:order-3 lg:col-span-3">
 						<button
 							type="button"
-							className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl border border-transparent bg-lime-400 text-black hover:bg-lime-500 focus:outline-hidden focus:bg-lime-500 transition disabled:opacity-50 disabled:pointer-events-none"
+							className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl border border-transparent bg-lime-400 text-black hover:bg-lime-500 focus:outline-hidden focus:bg-lime-500 transition disabled:opacity-50 disabled:pointer-events-none relative"
+							onClick={() => setIsCartOpen((v) => !v)}
+							aria-label="Abrir carrito"
 						>
-							<ShoppingCart />
+							<span className="relative">
+								<ShoppingCart />
+								{cart.length > 0 && (
+									<span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center border-2 border-white shadow z-10">
+										{cart.reduce((acc, item) => acc + item.quantity, 0)}
+									</span>
+								)}
+							</span>
 						</button>
 
 						<div className="lg:hidden pl-5">
@@ -171,6 +180,7 @@ const Navbar = () => {
 					</div>
 					{/* End Navigation Links */}
 				</nav>
+				<Cart open={isCartOpen} onClose={() => setIsCartOpen(false)} />
 			</header>
 			{/* ========== END HEADER ========== */}
 		</>
